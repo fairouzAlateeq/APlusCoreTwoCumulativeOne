@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A+ Core 2 — IT Technician Challenge</title>
+<style>
+  #aplus1201-sim {
+    --navy: #0b1f33;
+    --navy-2: #123a5a;
+    --blue: #1769aa;
+    --blue-2: #2d86c9;
+    --blue-soft: #eaf4fb;
+    --white: #ffffff;
+    --gray-25: #fbfcfd;
+    --gray-50: #f4f7f9;
+    --gray-100: #e7edf2;
+    --gray-200: #d4dde5;
+    --gray-500: #687786;
+    --gray-700: #334454;
+    --green: #16784a;
+    --green-soft: #e9f7ef;
+    --orange: #c85b14;
+    --orange-soft: #fff2e8;
+    --red: #b83a3a;
+    --red-soft: #fdecec;
+    --shadow: 0 14px 34px rgba(16, 42, 67, 0.13);
+    --radius: 16px;
+    width: 100%;
+    max-width: 1420px;
+    margin: 14px auto;
+    background: var(--white);
+    color: var(--navy);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.45;
+  }
+  #aplus1201-sim * { box-sizing: border-box; }
+  #aplus1201-sim button,
+  #aplus1201-sim textarea,
+  #aplus1201-sim input { font: inherit; }
+  #aplus1201-sim button { cursor: pointer; }
+  #aplus1201-sim .hidden { display: none !important; }
+  #aplus1201-sim .topbar {
+    background: linear-gradient(120deg, var(--navy), var(--navy-2));
+    color: var(--white);
+    padding: 22px 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  #aplus1201-sim .brand-row { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  #aplus1201-sim .brand-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,.75);
+    position: relative;
+    flex: 0 0 auto;
+  }
+  #aplus1201-sim .brand-mark::before,
+  #aplus1201-sim .brand-mark::after {
+    content: "";
+    position: absolute;
+    background: #6fc4f2;
+  }
+  #aplus1201-sim .brand-mark::before { left: 8px; right: 8px; top: 13px; height: 3px; }
+  #aplus1201-sim .brand-mark::after { top: 8px; bottom: 8px; left: 19px; width: 3px; }
+  #aplus1201-sim .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    opacity: .78;
+    margin-bottom: 4px;
+  }
+  #aplus1201-sim h1 { margin: 0; font-size: clamp(22px, 3vw, 34px); line-height: 1.08; }
+  #aplus1201-sim .top-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  #aplus1201-sim .ghost-btn,
+  #aplus1201-sim .primary-btn,
+  #aplus1201-sim .secondary-btn,
+  #aplus1201-sim .danger-btn,
+  #aplus1201-sim .tool-btn,
+  #aplus1201-sim .choice-btn {
+    border: 0;
+    border-radius: 9px;
+    padding: 10px 14px;
+    font-weight: 700;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  #aplus1201-sim .ghost-btn { background: rgba(255,255,255,.12); color: white; border: 1px solid rgba(255,255,255,.28); }
+  #aplus1201-sim .ghost-btn:hover,
+  #aplus1201-sim .primary-btn:hover,
+  #aplus1201-sim .secondary-btn:hover,
+  #aplus1201-sim .danger-btn:hover,
+  #aplus1201-sim .tool-btn:hover,
+  #aplus1201-sim .choice-btn:hover { transform: translateY(-1px); }
+  #aplus1201-sim .primary-btn { background: var(--blue); color: white; box-shadow: 0 5px 14px rgba(23,105,170,.22); }
+  #aplus1201-sim .secondary-btn { background: var(--white); color: var(--navy); border: 1px solid var(--gray-200); }
+  #aplus1201-sim .danger-btn { background: var(--red); color: white; }
+  #aplus1201-sim .workspace { padding: 20px; background: var(--gray-50); }
+  #aplus1201-sim .welcome-card {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    padding: clamp(22px, 4vw, 44px);
+    max-width: 980px;
+    margin: 8px auto;
+  }
+  #aplus1201-sim .welcome-card h2 { margin: 0 0 8px; font-size: 28px; }
+  #aplus1201-sim .welcome-card p { color: var(--gray-700); margin: 8px 0 14px; }
+  #aplus1201-sim .welcome-callout {
+    margin: 20px 0;
+    border-left: 5px solid var(--blue);
+    background: var(--blue-soft);
+    padding: 16px 18px;
+    border-radius: 8px;
+    color: var(--navy);
+  }
+  #aplus1201-sim .welcome-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin: 18px 0 24px; }
+  #aplus1201-sim .welcome-tile { border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px; background: var(--gray-25); }
+  #aplus1201-sim .welcome-tile strong { display: block; margin-bottom: 4px; }
+  #aplus1201-sim .metrics {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  #aplus1201-sim .metric {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 11px;
+    padding: 12px 14px;
+    min-width: 0;
+  }
+  #aplus1201-sim .metric-label { color: var(--gray-500); text-transform: uppercase; font-size: 10px; letter-spacing: .08em; font-weight: 700; }
+  #aplus1201-sim .metric-value { font-size: 19px; font-weight: 800; margin-top: 3px; color: var(--navy); }
+  #aplus1201-sim .progress-shell { height: 7px; background: var(--gray-100); border-radius: 20px; overflow: hidden; margin-top: 7px; }
+  #aplus1201-sim .progress-bar { height: 100%; width: 0%; background: var(--blue); transition: width .25s ease; }
+  #aplus1201-sim .dashboard-grid { display: grid; grid-template-columns: 330px minmax(0,1fr); gap: 16px; align-items: start; }
+  #aplus1201-sim .panel {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 13px;
+    overflow: hidden;
+  }
+  #aplus1201-sim .panel-head { padding: 14px 16px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--gray-25); }
+  #aplus1201-sim .panel-head h2,
+  #aplus1201-sim .panel-head h3 { margin: 0; font-size: 16px; }
+  #aplus1201-sim .queue { max-height: 760px; overflow: auto; padding: 8px; }
+  #aplus1201-sim .ticket-item {
+    width: 100%;
+    text-align: left;
+    border: 1px solid transparent;
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 7px;
+    color: var(--navy);
+  }
+  #aplus1201-sim .ticket-item:hover { background: var(--gray-50); border-color: var(--gray-200); }
+  #aplus1201-sim .ticket-item.active { background: var(--blue-soft); border-color: #9bc8e7; box-shadow: inset 3px 0 0 var(--blue); }
+  #aplus1201-sim .ticket-item.done { background: var(--green-soft); border-color: #b8e2c9; }
+  #aplus1201-sim .ticket-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 5px; }
+  #aplus1201-sim .ticket-id { font-weight: 800; font-size: 13px; }
+  #aplus1201-sim .priority { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 99px; }
+  #aplus1201-sim .priority::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  #aplus1201-sim .p-low { color: #376b52; background: #edf7f1; }
+  #aplus1201-sim .p-medium { color: #7c5b11; background: #fff6da; }
+  #aplus1201-sim .p-high { color: #a1451b; background: #fff0e7; }
+  #aplus1201-sim .p-critical { color: #a12626; background: #fdeaea; }
+  #aplus1201-sim .ticket-meta { color: var(--gray-500); font-size: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+  #aplus1201-sim .status-line { margin-top: 8px; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  #aplus1201-sim .status-open { color: var(--orange); }
+  #aplus1201-sim .status-progress { color: var(--blue); }
+  #aplus1201-sim .status-done { color: var(--green); }
+  #aplus1201-sim .ticket-content { padding: 18px; }
+  #aplus1201-sim .case-header { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 14px; }
+  #aplus1201-sim .case-header h2 { margin: 0 0 4px; font-size: clamp(20px,2.4vw,28px); }
+  #aplus1201-sim .case-sub { color: var(--gray-500); font-size: 13px; }
+  #aplus1201-sim .level-tag { border: 1px solid var(--gray-200); border-radius: 99px; padding: 6px 10px; background: var(--gray-50); color: var(--gray-700); font-weight: 700; font-size: 12px; }
+  #aplus1201-sim .scenario {
+    background: var(--gray-25);
+    border: 1px solid var(--gray-200);
+    border-left: 5px solid var(--blue);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px 0 16px;
+    font-size: 16px;
+  }
+  #aplus1201-sim .snapshot { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; margin-bottom: 16px; }
+  #aplus1201-sim .snapshot-item { border: 1px solid var(--gray-200); border-radius: 9px; padding: 10px 12px; background: white; }
+  #aplus1201-sim .snapshot-item span { color: var(--gray-500); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; font-weight: 700; }
+  #aplus1201-sim .snapshot-item strong { display: block; margin-top: 3px; font-size: 14px; overflow-wrap: anywhere; }
+  #aplus1201-sim .section-card { border: 1px solid var(--gray-200); border-radius: 11px; margin-top: 12px; overflow: hidden; }
+  #aplus1201-sim .section-title { background: var(--gray-25); border-bottom: 1px solid var(--gray-200); padding: 11px 13px; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+  #aplus1201-sim .section-title strong { font-size: 14px; }
+  #aplus1201-sim .section-body { padding: 12px; }
+  #aplus1201-sim .tool-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+  #aplus1201-sim .tool-btn { text-align: left; background: white; color: var(--navy); border: 1px solid var(--gray-200); min-height: 44px; }
+  #aplus1201-sim .tool-btn.used { background: var(--green-soft); border-color: #b8e2c9; color: #165d3d; }
+  #aplus1201-sim .tool-btn:disabled { cursor: default; opacity: 1; transform: none; }
+  #aplus1201-sim .results-log { margin-top: 10px; display: grid; gap: 7px; }
+  #aplus1201-sim .log-entry { border-left: 4px solid var(--blue); background: var(--blue-soft); padding: 9px 10px; border-radius: 7px; font-size: 13px; }
+  #aplus1201-sim .log-entry strong { display: block; margin-bottom: 2px; }
+  #aplus1201-sim .decision-box { border: 1px solid #b9cfdf; background: #f7fbfe; border-radius: 11px; padding: 14px; }
+  #aplus1201-sim .decision-count { color: var(--blue); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; }
+  #aplus1201-sim .decision-box h3 { margin: 5px 0 12px; font-size: 17px; }
+  #aplus1201-sim .choices { display: grid; gap: 8px; }
+  #aplus1201-sim .choice-btn { text-align: left; background: white; color: var(--navy); border: 1px solid var(--gray-200); }
+  #aplus1201-sim .choice-btn.correct { background: var(--green-soft); border-color: #9ed4b5; color: #155d3c; }
+  #aplus1201-sim .choice-btn.wrong { background: var(--red-soft); border-color: #e6b7b7; color: #8d2c2c; }
+  #aplus1201-sim .feedback { margin-top: 10px; padding: 10px 12px; border-radius: 8px; font-size: 13px; }
+  #aplus1201-sim .feedback.good { background: var(--green-soft); color: #155d3c; border: 1px solid #b8e2c9; }
+  #aplus1201-sim .feedback.bad { background: var(--orange-soft); color: #8b4218; border: 1px solid #f0c8aa; }
+  #aplus1201-sim .next-wrap { margin-top: 10px; display: flex; justify-content: flex-end; }
+  #aplus1201-sim .hint-box { margin-top: 10px; background: #fff8df; border: 1px solid #eedc9f; padding: 10px 12px; border-radius: 8px; color: #685118; font-size: 13px; }
+  #aplus1201-sim .resolution-box { background: var(--gray-25); border: 1px solid var(--gray-200); border-radius: 11px; padding: 14px; margin-top: 12px; }
+  #aplus1201-sim .resolution-box h3 { margin: 0 0 9px; }
+  #aplus1201-sim .resolution-box textarea,
+  #aplus1201-sim .reflection-grid textarea {
+    width: 100%;
+    min-height: 88px;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 10px 11px;
+    resize: vertical;
+    background: white;
+    color: var(--navy);
+  }
+  #aplus1201-sim .resolution-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  #aplus1201-sim .char-note { color: var(--gray-500); font-size: 12px; }
+  #aplus1201-sim .empty-state { text-align: center; padding: 58px 20px; color: var(--gray-500); }
+  #aplus1201-sim .empty-state .empty-icon { width: 52px; height: 52px; border: 3px solid var(--gray-200); border-radius: 13px; margin: 0 auto 12px; position: relative; }
+  #aplus1201-sim .empty-state .empty-icon::before { content: ""; position: absolute; width: 20px; height: 3px; background: var(--gray-200); left: 13px; top: 17px; box-shadow: 0 8px 0 var(--gray-200); }
+  #aplus1201-sim .finish-banner { background: var(--green-soft); border: 1px solid #b8e2c9; border-radius: 11px; padding: 14px; margin: 0 0 14px; display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+  #aplus1201-sim .report-wrap { display: grid; gap: 16px; }
+  #aplus1201-sim .report-hero { background: linear-gradient(120deg, var(--navy), #174e76); color: white; padding: 22px; border-radius: 12px; display: grid; grid-template-columns: 180px 1fr; gap: 20px; align-items: center; }
+  #aplus1201-sim .score-ring { width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(#6fc4f2 0%, #6fc4f2 var(--scoreDeg,0%), rgba(255,255,255,.16) var(--scoreDeg,0%), rgba(255,255,255,.16) 100%); display: grid; place-items: center; margin: auto; }
+  #aplus1201-sim .score-ring-inner { width: 116px; height: 116px; border-radius: 50%; background: var(--navy); display: grid; place-items: center; text-align: center; }
+  #aplus1201-sim .score-ring-inner b { font-size: 32px; display: block; line-height: 1; }
+  #aplus1201-sim .report-hero h2 { margin: 0 0 5px; font-size: 26px; }
+  #aplus1201-sim .report-hero p { margin: 4px 0; color: rgba(255,255,255,.85); }
+  #aplus1201-sim .report-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+  #aplus1201-sim .skill-card { border: 1px solid var(--gray-200); border-radius: 10px; padding: 12px; background: white; }
+  #aplus1201-sim .skill-top { display: flex; justify-content: space-between; gap: 8px; font-weight: 700; font-size: 13px; }
+  #aplus1201-sim .skill-bar { margin-top: 7px; background: var(--gray-100); height: 8px; border-radius: 99px; overflow: hidden; }
+  #aplus1201-sim .skill-fill { height: 100%; background: var(--blue); width: 0%; }
+  #aplus1201-sim .report-stats { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 9px; }
+  #aplus1201-sim .report-stat { border: 1px solid var(--gray-200); border-radius: 9px; padding: 11px; text-align: center; background: var(--gray-25); }
+  #aplus1201-sim .report-stat b { display: block; font-size: 21px; }
+  #aplus1201-sim .report-stat span { color: var(--gray-500); font-size: 11px; }
+  #aplus1201-sim .tabs { display: flex; gap: 7px; flex-wrap: wrap; border-bottom: 1px solid var(--gray-200); padding-bottom: 9px; }
+  #aplus1201-sim .tab-btn { border: 1px solid var(--gray-200); background: white; color: var(--navy); border-radius: 8px; padding: 8px 11px; font-weight: 700; }
+  #aplus1201-sim .tab-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+  #aplus1201-sim .review-list { display: grid; gap: 9px; }
+  #aplus1201-sim details { border: 1px solid var(--gray-200); border-radius: 9px; background: white; overflow: hidden; }
+  #aplus1201-sim summary { cursor: pointer; padding: 12px 14px; font-weight: 800; background: var(--gray-25); }
+  #aplus1201-sim .review-body { padding: 13px 14px; font-size: 13px; color: var(--gray-700); }
+  #aplus1201-sim .review-body p { margin: 6px 0; }
+  #aplus1201-sim .review-body strong { color: var(--navy); }
+  #aplus1201-sim .reflection-grid { display: grid; gap: 12px; }
+  #aplus1201-sim .reflection-item { border: 1px solid var(--gray-200); border-radius: 9px; padding: 12px; background: white; }
+  #aplus1201-sim .reflection-item label { display: block; font-weight: 700; margin-bottom: 7px; font-size: 13px; }
+  #aplus1201-sim .save-note { color: var(--green); font-size: 12px; font-weight: 700; min-height: 18px; }
+  #aplus1201-sim .workflow-strip { border: 1px solid var(--gray-200); background: white; border-radius: 10px; padding: 11px; margin: 12px 0; }
+  #aplus1201-sim .workflow-strip strong { display:block; margin-bottom:8px; font-size:13px; }
+  #aplus1201-sim .workflow-steps { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:5px; }
+  #aplus1201-sim .workflow-step { min-width:0; padding:7px 5px; border-radius:7px; background:var(--gray-50); border:1px solid var(--gray-200); text-align:center; font-size:10px; font-weight:700; color:var(--gray-500); }
+  #aplus1201-sim .workflow-step.done { background:var(--green-soft); border-color:#b8e2c9; color:#236745; }
+  #aplus1201-sim .workflow-step.active { background:var(--blue-soft); border-color:#9bc8e7; color:var(--blue); box-shadow:inset 0 -2px 0 var(--blue); }
+  #aplus1201-sim .modal-backdrop { position: fixed; inset: 0; background: rgba(8,24,39,.58); z-index: 999999; display: grid; place-items: center; padding: 20px; }
+  #aplus1201-sim .modal { width: min(560px,100%); background: white; border-radius: 13px; box-shadow: 0 22px 60px rgba(0,0,0,.28); padding: 20px; }
+  #aplus1201-sim .modal h3 { margin: 0 0 7px; }
+  #aplus1201-sim .modal p { color: var(--gray-700); }
+  #aplus1201-sim .modal-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 16px; }
+  #aplus1201-sim .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  @media (max-width: 1120px) {
+    #aplus1201-sim .metrics { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    #aplus1201-sim .dashboard-grid { grid-template-columns: 280px minmax(0,1fr); }
+    #aplus1201-sim .report-stats { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  }
+  @media (max-width: 820px) {
+    #aplus1201-sim .workspace { padding: 12px; }
+    #aplus1201-sim .dashboard-grid { grid-template-columns: 1fr; }
+    #aplus1201-sim .queue { max-height: 300px; }
+    #aplus1201-sim .welcome-grid { grid-template-columns: 1fr; }
+    #aplus1201-sim .report-hero { grid-template-columns: 1fr; text-align: center; }
+  }
+  @media (max-width: 620px) {
+    #aplus1201-sim .topbar { padding: 18px; }
+    #aplus1201-sim .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    #aplus1201-sim .snapshot,
+    #aplus1201-sim .tool-grid,
+    #aplus1201-sim .report-grid { grid-template-columns: 1fr; }
+    #aplus1201-sim .report-stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    #aplus1201-sim .workflow-steps { grid-template-columns: repeat(4,minmax(0,1fr)); }
+  }
+</style>
+</head>
+<body>
+<div id="aplus1201-sim">
+  <header class="topbar">
+    <div class="brand-row">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <div class="eyebrow">Northstar Creative Solutions · IT Support</div>
+        <h1 style="color:#c85b14;">A+ Core 2 — IT Technician Challenge</h1>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="ghost-btn hidden" id="reportBtn" type="button">Performance Report</button>
+      <button class="ghost-btn" id="resetBtn" type="button">Reset Simulation</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section id="welcomeView" class="welcome-card">
+      <div class="eyebrow" style="color:#1769aa;opacity:1;">Final cumulative simulation · CompTIA A+ Core 2 (220-1202)</div>
+      <h2>Welcome to the IT Support Team.</h2>
+      <p>You have just been hired as a <strong>Junior IT Support Technician</strong> at Northstar Creative Solutions. Your queue contains real support incidents from employees across the company.</p>
+      <div class="welcome-callout">
+        You will not be told what topic each incident is testing. Use the evidence, ask useful questions, run diagnostics, form a theory, test it, fix the issue, verify functionality, and document what you did.
+      </div>
+      <div class="welcome-grid">
+        <div class="welcome-tile"><strong>Investigate before changing</strong><span>Gather facts and use diagnostic results instead of guessing.</span></div>
+        <div class="welcome-tile"><strong>Think like a technician</strong><span>Choose the best next action based on what you know at that moment.</span></div>
+        <div class="welcome-tile"><strong>Close the loop</strong><span>Verify full functionality and leave a useful resolution note.</span></div>
+      </div>
+      <button class="primary-btn" id="startBtn" type="button">Start Technician Shift</button>
+    </section>
+
+    <section id="simulationView" class="hidden">
+      <div class="metrics" aria-label="Simulation metrics">
+        <div class="metric"><div class="metric-label">Technician</div><div class="metric-value" style="font-size:14px;">Junior IT Support Technician</div></div>
+        <div class="metric"><div class="metric-label">Tickets Resolved</div><div class="metric-value" id="mResolved">0 / 12</div><div class="progress-shell"><div class="progress-bar" id="mProgress"></div></div></div>
+        <div class="metric"><div class="metric-label">Current Score</div><div class="metric-value" id="mScore">100%</div></div>
+        <div class="metric"><div class="metric-label">Incorrect Decisions</div><div class="metric-value" id="mWrong">0</div></div>
+        <div class="metric"><div class="metric-label">Hints Used</div><div class="metric-value" id="mHints">0</div></div>
+        <div class="metric"><div class="metric-label">Shift Time</div><div class="metric-value" id="mTime">00:00</div></div>
+      </div>
+
+      <div id="finishBanner" class="finish-banner hidden">
+        <div><strong>All support incidents are resolved.</strong><div style="color:#376b52;font-size:13px;">Your performance report and answer review are ready.</div></div>
+        <button class="primary-btn" id="finishBtn" type="button">Open Performance Report</button>
+      </div>
+
+      <div class="dashboard-grid">
+        <aside class="panel">
+          <div class="panel-head"><h2>Support Queue</h2><span id="queueCount" style="font-size:12px;color:#687786;">12 tickets</span></div>
+          <div class="queue" id="ticketQueue"></div>
+        </aside>
+        <section class="panel" id="ticketPanel">
+          <div class="empty-state" id="emptyTicket">
+            <div class="empty-icon" aria-hidden="true"></div>
+            <strong>Select a ticket from the queue</strong>
+            <div>Review the incident, gather information, and begin troubleshooting.</div>
+          </div>
+          <div class="ticket-content hidden" id="ticketContent"></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="reportView" class="hidden report-wrap"></section>
+  </main>
+
+  <div id="resetModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+    <div class="modal">
+      <h3 id="resetTitle">Reset the entire simulation?</h3>
+      <p>This will clear ticket progress, scores, diagnostic results, hints, completed tickets, reflections, and the final report.</p>
+      <div class="modal-actions">
+        <button class="secondary-btn" id="cancelReset" type="button">Cancel</button>
+        <button class="danger-btn" id="confirmReset" type="button">Reset Everything</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const root = document.getElementById("aplus1201-sim");
+  const $ = (sel) => root.querySelector(sel);
+  const esc = (value) => String(value == null ? "" : value).replace(/[&<>'"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));
+
+  const D=(q,ok,okfb,...w)=>({q,choices:[[ok,1,okfb],...w.map(x=>[x[0],0,x[1]])]});
+    const R=(happened,noticed,process,root,solution,why,concept)=>({happened,noticed,process,root,solution,why,concept});
+    const tickets = [
+      {
+        id:"TKT-2001", priority:"HIGH", level:"Level 1", department:"Design", device:"Windows 11 workstation",
+        title:"Workstation blue-screens and loops into recovery after an update",
+        scenario:"A designer let a graphics driver update install last night. This morning Windows shows a blue screen, restarts, and ends at the Recovery screen. All of the designer's work is on the local drive and has not been backed up.",
+        snapshot:[["OS","Windows 11 Pro"],["Stop code","Display driver fault"],["Recent change","GPU driver updated last night"],["Boot behavior","Loops into Automatic Repair"]],
+        customer:[["What changed before this began?","I allowed the graphics driver update and restarted."],["Does it ever reach the desktop?","No. Blue screen, restart, then the Recovery screen."],["Is any data backed up?","No. Everything is on this drive."]],
+        diagnostics:[["Read the stop code","The stop code names a display driver file that was updated last night."],["Boot into Safe Mode from the recovery environment","Safe Mode loads with a basic display driver and reaches the desktop."],["Check System Restore points","System Protection was disabled; no restore points exist."],["Review the display adapter in Device Manager (Safe Mode)","Driver version matches last night's update; Roll Back Driver is available."],["Check disk health","SMART status is healthy; no file system errors."]],
+        hints:["Safe Mode works, which uses minimal drivers. What does that say about the failing component?","Consider which recovery option fixes the cause without destroying the user's only copy of the data."],
+        decisions:[
+          D("Which finding best explains the boot failure?","A stop code naming a display driver that was updated right before the failures began","The timing and stop code both point to the new driver.",["The SSD is failing and corrupting Windows","SMART status is healthy and Safe Mode loads from the same drive."],["The boot loader is missing","Windows starts loading and crashes, so the boot loader is being found."],["The page file is too small","Nothing in the stop code or evidence supports a memory configuration problem."]),
+          D("Safe Mode works. What is the best way to restore normal booting while keeping the user's data?","In Safe Mode, use Device Manager to roll back the display driver","Rolling back reverses the one change that caused the crash and leaves data untouched.",["Run System Restore from the recovery environment","No restore points exist because System Protection was disabled."],["Use Reset this PC and remove everything","That would destroy data that has no backup."],["Run sfc /scannow and expect it to fix the crash","Nothing points to corrupted system files; the evidence points to a driver."]),
+          D("How should you verify the repair?","Restart normally, confirm the desktop loads, the display works at native resolution, and the driver update is deferred until validated","This confirms the original symptom is gone and prevents an immediate repeat.",["Confirm Safe Mode still loads","Safe Mode already worked before the repair."],["Confirm Windows Update shows no pending updates","That says nothing about whether the system now boots and displays properly."],["Confirm the recovery screen appears after restart","That is the original failure, not a success."])
+        ],
+        skills:["Operating Systems","Software Troubleshooting","Problem Solving","Troubleshooting Methodology","Verification","Documentation"],
+        review:R("A new GPU driver caused repeated blue screens and a recovery loop.","The stop code named a display driver, Safe Mode worked, and there were no restore points.","Read the stop code, boot Safe Mode, check restore options, inspect the driver, roll back, restart normally and verify.","A faulty display driver update.","Roll back the display driver from Safe Mode and defer the update until it is validated.","Reverting only the changed component fixes the cause and preserves user data.","Windows recovery environment, Safe Mode, driver rollback, System Restore, and evidence-based OS troubleshooting.")
+      },
+      {
+        id:"TKT-2002", priority:"MEDIUM", level:"Level 1", department:"Finance", device:"Domain-joined PC",
+        title:"One PC is missing the new mapped drive and USB restriction",
+        scenario:"IT deployed a Group Policy that maps the Finance share and blocks USB storage. Every PC in the department received it except one that just returned from a week in the repair shop.",
+        snapshot:[["Domain membership","Joined"],["Network","Connected"],["Sign-in","Domain account works"],["Symptom","No mapped drive; USB storage still allowed"]],
+        customer:[["Did coworkers get the mapped drive?","Yes, everyone else has it."],["Where has this PC been?","In the repair shop for about a week."],["Can you sign in normally?","Yes, with my domain account."]],
+        diagnostics:[["Run gpresult /r","Policies were last applied 9 days ago and the new GPO is not listed."],["Ping the domain controller","Replies received."],["Test DNS for the domain","Domain name resolves correctly."],["Check OU membership","Computer and user are in the same OU as working PCs."],["Check time synchronization","Clock is within one minute of the domain controller."]],
+        hints:["The PC can reach the domain controller and is in the right OU. What does the 'last applied' time suggest?","Which command forces a policy refresh?"],
+        decisions:[
+          D("Which command shows which policies are applied and when they were last applied?","gpresult /r","It reports applied GPOs and the last refresh time.",["ipconfig /all","That shows IP configuration, not Group Policy results."],["net use","That only lists current drive mappings and does not explain why a policy is missing."],["nslookup","That tests DNS resolution, which is already working."]),
+          D("Policy last applied 9 days ago and the domain controller is reachable. What is the best action?","Run gpupdate /force and sign out/in if required","It pulls current policy from the domain immediately.",["Manually map the drive and edit local settings to block USB","That is a workaround that leaves the PC out of policy compliance."],["Rejoin the PC to the domain","This is excessive; the trust relationship is working."],["Run sfc /scannow","There is no sign of corrupted system files."]),
+          D("What is the best verification?","Rerun gpresult /r to confirm the GPO is listed, confirm the drive maps, and test that a USB drive is blocked","It validates both the policy and its actual effects.",["Confirm the user can still sign in","That was already working."],["Ping the domain controller again","Connectivity was never the problem."],["Confirm the drive letter shows in Settings","The USB restriction also must be validated."])
+        ],
+        skills:["Operating Systems","Software Troubleshooting","Problem Solving","Troubleshooting Methodology","Verification","Documentation"],
+        review:R("A recently returned PC never received a new Group Policy.","Policies were nine days old while the domain controller, DNS, and OU were fine.","Compare with working PCs, run gpresult, confirm domain connectivity, force a refresh, verify effects.","Stale Group Policy on a PC that had been offline.","Run gpupdate /force and verify the mapped drive and USB block.","Policies only apply after a refresh; a long-offline machine may not have pulled them.","Group Policy, gpresult, gpupdate, and Windows command-line tools.")
+      },
+      {
+        id:"TKT-2003", priority:"HIGH", level:"Level 2", department:"Sales", device:"Windows laptop",
+        title:"Pop-ups, hijacked homepage, and antivirus turned off",
+        scenario:"A salesperson reports constant pop-ups, a changed browser homepage, a loud fan, and antivirus that now shows as disabled. The laptop is still connected to the company network.",
+        snapshot:[["Antivirus","Disabled by unknown process"],["Browser","Unknown extensions installed"],["CPU","Unknown process using 80%"],["System Restore","Enabled"]],
+        customer:[["When did this start?","After I installed a free PDF converter yesterday."],["Did you click anything unusual?","I clicked through the installer quickly."],["Do you have files saved locally?","Yes, but nothing critical."]],
+        diagnostics:[["Review browser extensions","Three unknown extensions are installed."],["Open Task Manager","An unfamiliar process is using 80% CPU and has a random name."],["Check antivirus status","Real-time protection is turned off and cannot be re-enabled."],["Check outbound connections","Repeated connections to unknown external hosts."],["Check scheduled tasks and startup","An unknown task launches the process at sign-in."]],
+        hints:["CompTIA expects a specific order for malware removal. Evidence comes before action.","Containment and removing restore points come before the main cleanup scan."],
+        decisions:[
+          D("According to the CompTIA malware removal process, what comes first?","Investigate and verify malware symptoms","You confirm what you are dealing with before taking action.",["Quarantine the infected system","This is the next step, after symptoms are identified."],["Disable System Restore","This comes after quarantine."],["Remediate the infected system","Remediation comes later in the sequence."]),
+          D("Symptoms are verified. What is next?","Quarantine the laptop by disconnecting it from the network","This stops spread and outbound communication.",["Update definitions and run a full scan","The system should be isolated before remediation."],["Educate the user","Education is the final step."],["Create a new restore point","Restore points could preserve the infection."]),
+          D("The system is isolated. What should happen before the main cleanup scan?","Disable System Restore and delete existing restore points","Malware can hide in restore points and re-infect the system.",["Enable more restore points","This could preserve infected data."],["Delete browser history","That does not address the infection."],["Defragment the drive","That does not help remove malware."]),
+          D("What is the best remediation approach?","Update anti-malware definitions, boot into Safe Mode or an offline environment, and run a full scan","Scanning in a clean environment prevents the malware from interfering.",["Run a quick scan in normal mode","The malware is actively disabling protection and may evade a quick scan."],["Only reset the browser homepage","This leaves the running process and persistence in place."],["Delete the unknown process from Task Manager","It will return through the scheduled task."]),
+          D("After a clean scan, what completes the process?","Re-enable System Restore with a new restore point, schedule scans and updates, and educate the user","These are the final steps that prevent reinfection.",["Close the ticket after one clean scan","Future prevention and user education are still missing."],["Reinstall the same PDF converter","That could reintroduce the threat."],["Disable the antivirus to avoid slowdowns","That weakens security."])
+        ],
+        skills:["Security","Software Troubleshooting","Problem Solving","Critical Thinking","Troubleshooting Methodology","Verification","Documentation"],
+        review:R("A free installer infected the laptop with malware that disabled antivirus and hijacked the browser.","Unknown extensions, a high-CPU process, disabled AV, and suspicious outbound connections.","Identify symptoms, quarantine, disable System Restore, remediate, schedule scans, re-enable restore, educate.","Malware from an untrusted installer.","Follow the malware removal best-practice sequence in order.","Order matters: containment and restore-point control stop spread and reinfection.","Malware removal steps, Safe Mode scanning, user education.")
+      },
+      {
+        id:"TKT-2004", priority:"MEDIUM", level:"Level 2", department:"Operations", device:"Windows 10 desktop",
+        title:"Computer takes five minutes to become usable after sign-in",
+        scenario:"An operations employee says the desktop takes about five minutes after sign-in before anything responds. Performance is fine once everything finally loads.",
+        snapshot:[["Storage","SSD, 70% free"],["RAM","16 GB, normal use"],["Boot to sign-in","Fast"],["After sign-in","Very slow for several minutes"]],
+        customer:[["When is it slow?","Only right after signing in."],["Did you install new software?","Several tools in the last month."],["Does it crash or show errors?","No errors, just slow."]],
+        diagnostics:[["Open Task Manager Startup tab","14 apps are enabled; 8 are marked High impact."],["Check memory usage after boot","6 GB of 16 GB used; no memory pressure."],["Check drive health","SSD health is good; no errors."],["Check CPU after sign-in","CPU is near 100% for several minutes, then drops."],["Check for malware","Scan is clean."]],
+        hints:["The slowness fades on its own. What launches only at sign-in?","Storage, RAM, and malware were all ruled out."],
+        decisions:[
+          D("Which tool best shows what runs at sign-in and its impact?","The Startup tab in Task Manager","It lists startup apps and their impact ratings.",["Disk Defragmenter","This is not the right tool for startup impact and SSDs should not be defragmented."],["Device Manager","It shows hardware, not startup programs."],["Disk Cleanup","It frees space but does not control startup."]),
+          D("What is the best corrective action?","Disable unneeded high-impact startup items","This removes the cause of the sign-in load.",["Install more RAM","Memory usage is normal."],["Defragment the SSD","SSD health is fine and defragmentation does not help."],["Reinstall Windows","This is excessive when there is clear evidence."]),
+          D("How do you verify the fix?","Restart, sign in, and confirm the desktop becomes responsive quickly while needed apps still work","This repeats the original condition.",["Run the malware scan again","It was already clean."],["Check SSD free space","That was not the issue."],["Confirm Task Manager opens","That does not measure the sign-in delay."])
+        ],
+        skills:["Operating Systems","Software Troubleshooting","Problem Solving","Troubleshooting Methodology","Verification","Documentation"],
+        review:R("The desktop was slow only after sign-in.","Many high-impact startup apps while RAM, storage, and malware checks were normal.","Identify when the slowdown happens, check startup items, rule out hardware, disable unneeded entries, retest.","Too many high-impact startup programs.","Disable unneeded startup items in Task Manager.","Fewer programs compete for CPU and disk at sign-in.","Task Manager, startup management, and Windows performance troubleshooting.")
+      },
+      {
+        id:"TKT-2005", priority:"MEDIUM", level:"Level 2", department:"Development", device:"Linux workstation",
+        title:"Backup script returns 'Permission denied' on a Linux machine",
+        scenario:"A developer wrote backup.sh in their home directory. Running ./backup.sh returns 'Permission denied.' They can open and read the file normally.",
+        snapshot:[["OS","Ubuntu Linux"],["File owner","The developer"],["File mode","Read and write for owner only"],["Error","Permission denied"]],
+        customer:[["Can you read the file?","Yes, I can open it in an editor."],["Is the script new?","I created it this morning."],["Have you used sudo?","No, I want to run it as myself."]],
+        diagnostics:[["Run ls -l backup.sh","Shows -rw-r--r-- owned by the developer."],["Check owner against the current user","They match."],["Check the filesystem","Mounted read-write; other files execute fine."],["Review the script syntax","No syntax errors."],["Check account status","Account is active and not locked."]],
+        hints:["Reading works but running fails. Which permission bit is missing?","Ownership is already correct."],
+        decisions:[
+          D("What should you check first?","The file's permissions and ownership with ls -l","It shows exactly who can read, write, and execute.",["Reboot the workstation","There is no evidence of a system-wide problem."],["Reinstall bash","Other scripts run fine."],["Run the script with sudo permanently","That hides the cause and violates least privilege."]),
+          D("What does the output show?","The execute permission bit is not set","The file mode has no x for the owner.",["The account is locked","The user can sign in and read files."],["The filesystem is read-only","Other files execute normally."],["The script contains a syntax error","The error is a permission error, not a syntax one."]),
+          D("Which command best fixes the issue?","chmod u+x backup.sh","It adds execute permission for the owner only.",["chown root backup.sh","Ownership is already correct and root ownership could make it worse."],["chmod 444 backup.sh","That removes write access and still gives no execute permission."],["rm backup.sh","That deletes the work and does not solve the issue."]),
+          D("How should you verify?","Run ./backup.sh as the developer and confirm the backup completes","This tests the actual task as the actual user.",["Run ls -l again and stop","That only confirms the mode changed."],["Run it with sudo","That does not validate the user's access."],["Open the file in an editor","It could already be read.."])
+        ],
+        skills:["Operating Systems","Software Troubleshooting","Problem Solving","Critical Thinking","Troubleshooting Methodology","Verification","Documentation"],
+        review:R("A script could not execute despite being readable.","The mode lacked the execute bit while owner and filesystem were fine.","Inspect permissions, compare owner, check filesystem and syntax, add execute, retest.","Missing execute permission.","chmod u+x backup.sh","Linux requires the execute bit to run a file as a program.","Linux permissions, ls -l, chmod, ownership, and least privilege.")
+      },
+      {
+        id:"TKT-2006", priority:"HIGH", level:"Level 3", department:"Accounting", device:"Email and web account",
+        title:"Employee entered credentials on a suspicious payroll page",
+        scenario:"An accountant received an urgent email about a payroll update and clicked the link. The page asked them to sign in and they did. Ten minutes later they became suspicious and called IT.",
+        snapshot:[["Sender domain","northstar-payro11.com"],["Link destination","Look-alike sign-in page"],["Credentials entered","Yes, 10 minutes ago"],["MFA","Not enabled"]],
+        customer:[["What did the email say?","It demanded I verify my payroll info today."],["Did you download anything?","No attachments."],["Do you reuse that password elsewhere?","Yes, on a couple of sites."]],
+        diagnostics:[["Inspect the sender address","Domain uses a digit 1 in place of the letter l."],["Hover over the link","Destination is not the company domain."],["Review account sign-in log","One sign-in from an unfamiliar location 4 minutes ago."],["Check mailbox rules","A new forwarding rule sends mail to an external address."],["Scan the workstation","No malware found."]],
+        hints:["A user credential was handed to an attacker. Containment comes first.","No malware was found, so a scan alone will not fix the account."],
+        decisions:[
+          D("Which finding best identifies this as phishing?","A look-alike sender and link domain combined with urgency","Spoofed domains and pressure are classic phishing signs.",["The email used HTML formatting","Legitimate email is often HTML too."],["The email had no attachment","That does not indicate phishing."],["The email arrived during business hours","Timing does not identify a phishing email."]),
+          D("The user entered credentials and there was an unfamiliar sign-in. What is the best immediate action?","Reset the password, revoke active sessions, remove the rogue forwarding rule, and notify security","This cuts off the attacker and starts incident response.",["Delete the email and monitor","The attacker already has the credentials."],["Run a full antivirus scan only","No malware was found; the account is what's compromised."],["Ask the user to change the password next week","The attacker has access now."]),
+          D("Which control best protects the account if credentials leak again?","Enable multifactor authentication","A stolen password alone would not be enough.",["Lengthen the password expiration period","That does not stop a stolen credential from working."],["Block only the one sender domain","Attackers can use new domains."],["Disable spam filtering for faster delivery","That weakens defenses."]),
+          D("What is the best closing action?","Report per incident policy, block the domain at the mail gateway, confirm no further suspicious logins, reset reused passwords, and train the user","This addresses containment, prevention, and awareness.",["Close the ticket after the password reset","Reused passwords and follow-up are still open."],["Only email the team a warning","That does not contain or verify anything."],["Reimage the laptop","There was no sign of infection."])
+        ],
+        skills:["Security","Problem Solving","Critical Thinking","Troubleshooting Methodology","Verification","Documentation"],
+        review:R("An employee surrendered credentials to a phishing page.","A spoofed domain, a suspicious sign-in, a rogue forwarding rule, and no MFA.","Identify the phish, contain the account, remove attacker persistence, add MFA, report, and educate.","Credential phishing against an account without MFA.","Reset credentials, revoke sessions, remove rules, enable MFA, report and train.","Containment plus layered controls reduce harm and recurrence.","Phishing, social engineering, MFA, incident response, and user training.")
+      },
+      {
+        id:"TKT-2007", priority:"HIGH", level:"Level 3", department:"Executive Support", device:"Personal phone with work email",
+        title:"Employee loses a personal phone that has company email",
+        scenario:"An executive assistant lost their personal phone at an airport. It has the company email and file apps through the company's mobile device management (MDM) enrollment. It also contains personal photos.",
+        snapshot:[["Ownership","Personal (BYOD)"],["MDM enrolled","Yes"],["Passcode","Not enforced"],["Work data","Email and cloud files"]],
+        customer:[["Is there a screen lock?","No, I never set one."],["Does it hold personal data?","Yes, family photos."],["Was the phone encrypted?","I am not sure."]],
+        diagnostics:[["Check MDM console","Device is online and shows last check-in 5 minutes ago."],["Review the policy","A work profile holds email and files; a selective wipe is supported."],["Check last known location","Location shows the airport terminal."],["Review account sign-ins","No unusual sign-ins yet."],["Check enforced controls","No passcode or encryption requirement is configured."]],
+        hints:["The phone is personal but holds company data. Which action protects the company without needlessly destroying personal data?","Look at what the MDM console supports."],
+        decisions:[
+          D("What is the most important first priority?","Protect company data through the MDM","The device is reachable and enrolled.",["Order a replacement phone","That does nothing about the missing device's data."],["Ask the carrier to suspend the line","The phone could still reach company data over Wi-Fi."],["Change only the email password","The device may retain cached data and tokens."]),
+          D("The phone is personal with family photos. What is the best wipe approach?","Selective wipe of the work profile and corporate data","It removes company data and preserves personal data.",["Remotely factory reset the entire device","That erases personal data unnecessarily."],["Wait for it to be found","It could be accessed first."],["Disable the user's account permanently","That blocks the user without securing the device."]),
+          D("Which prior control would have most reduced exposure?","Enforcing a passcode and device encryption via MDM","It protects data if the device is lost.",["Disabling Bluetooth","That does not secure data at rest."],["Turning on Airplane mode","It is not a data protection control."],["Using a brighter lock-screen","Irrelevant to security."]),
+          D("What is the best closing action?","Confirm the MDM shows the wipe completed, revoke tokens, document the incident, and apply enrollment policy updates","It closes both the incident and the policy gap.",["Close after the selective wipe command is sent","It must be confirmed completed."],["Only email the user an apology","Nothing is verified."],["Remove MDM enrollment for all BYOD","That removes protections."])
+        ],
+        skills:["Security","Operating Systems","Problem Solving","Critical Thinking","Verification","Documentation"],
+        review:R("A personal phone with work data was lost.","MDM was enrolled but no passcode or encryption was enforced.","Verify scope, use MDM remote actions, choose the least-destructive effective action, confirm and document.","Lost BYOD device with unprotected corporate data.","Selectively wipe the work profile and enforce passcode and encryption.","It protects company data while respecting personal data.","MDM, BYOD, remote wipe, encryption, and mobile security.")
+      },
+      {
+        id:"TKT-2008", priority:"MEDIUM", level:"Level 3", department:"Branch Office", device:"SOHO wireless router",
+        title:"Unknown devices appear on the new office router",
+        scenario:"A small office installed a new router last week. The admin page shows three unfamiliar devices connected to the wireless network. The Wi-Fi passphrase is long and complex.",
+        snapshot:[["Wi-Fi security","WPA2-Personal, strong passphrase"],["WPS","Enabled (PIN method)"],["Admin login","Default credentials"],["Firmware","Three years old"]],
+        customer:[["Who has the Wi-Fi password?","Only the five staff members."],["Did you configure the router?","The ISP installed it; we never changed settings."],["Do unknown devices appear regularly?","Yes, new ones show up every few days."]],
+        diagnostics:[["Review the connected client list","Three unknown MAC addresses are listed."],["Check WPS","WPS PIN is enabled."],["Check admin credentials","Default username and password are still active."],["Check remote administration","Disabled."],["Check firmware","Several security updates are available."]],
+        hints:["A strong passphrase does not help if there is another way to obtain it.","Pick the finding that most directly explains new devices joining."],
+        decisions:[
+          D("Which finding most directly explains the unknown devices?","WPS PIN is enabled","The WPS PIN can be brute-forced to reveal the Wi-Fi passphrase.",["SSID broadcast is enabled","This does not give anyone the passphrase."],["The channel is set to auto","Channel selection does not allow access."],["DHCP lease time is 24 hours","Lease time is unrelated."]),
+          D("What is the best fix for the access path?","Disable WPS","This removes the weak join method.",["Enable MAC filtering only","MAC addresses can be spoofed and WPS would still remain."],["Hide the SSID","Hidden networks are still discoverable."],["Reduce transmit power","It does not stop determined attackers."]),
+          D("The attackers may already know the passphrase. What removes them?","Change the Wi-Fi passphrase and reconnect the legitimate devices","Old credentials become invalid.",["Reboot the router","Rebooting does not invalidate the passphrase."],["Leave it, because disabling WPS revokes access","Anyone already holding the passphrase can still connect."],["Enable MAC filtering with the old passphrase","The old passphrase remains compromised."]),
+          D("What other change is the highest priority on the router?","Change the default admin credentials and update firmware","This protects the management interface and known vulnerabilities.",["Move to a different Wi-Fi channel","That is not a security fix."],["Reserve IP addresses for all devices","That helps management, not security."],["Enable UPnP","That could expose the network more."])
+        ],
+        skills:["Security","Problem Solving","Critical Thinking","Troubleshooting Methodology","Verification","Documentation"],
+        review:R("Unknown devices joined a small office network.","WPS PIN was enabled and the router still used default admin credentials and old firmware.","Review client list and configuration, remove weak access paths, rotate credentials, harden the router.","WPS enabled, default credentials, and outdated firmware.","Disable WPS, change the passphrase and admin credentials, and update firmware.","It closes the entry method and invalidates already-exposed credentials.","SOHO router security, WPA2/WPA3, WPS, default credentials, and firmware.")
+      },
+      {
+        id:"TKT-2009", priority:"MEDIUM", level:"Level 3", department:"IT Operations", device:"Production file server",
+        title:"Technician wants to install a critical patch on a production server",
+        scenario:"A critical security patch is available for the production file server. A technician plans to install it right now because it is urgent. The server is used by all departments during the day.",
+        snapshot:[["System","Production file server"],["Users affected","All departments"],["Patch severity","Critical"],["Change process","Company requires change management"]],
+        customer:[["How many users depend on it?","Everyone, all day."],["Has the patch been tested?","Only on a non-production lab server."],["Is there a backup?","Nightly backups; no rollback plan documented."]],
+        diagnostics:[["Review lab test results","The patch installed cleanly in the lab."],["Check the change management policy","Production changes need a request, approval, and scheduled window."],["Review backup status","Last backup completed successfully."],["Review business calendar","Low-usage window available Saturday night."],["Check dependent services","Two applications depend on the server."]],
+        hints:["Urgent does not mean skipping the process.","What would you need if the patch caused an outage?"],
+        decisions:[
+          D("What should the technician do first?","Submit a change request with scope, risk, test results, and a rollback plan","This follows the change management process.",["Install the patch immediately because it is critical","It bypasses approval and risk review."],["Test the patch on the production server first","That risks an outage with no approval."],["Ask a coworker to verbally approve it","Approval must follow the formal process."]),
+          D("Which element allows recovery if the patch fails?","A tested backup and rollback plan","It defines how to return to the previous working state.",["Lab test results alone","Test results do not provide recovery steps."],["Approval from end users","That does not help recovery."],["A longer maintenance window","Time alone does not restore service."]),
+          D("When should the change be implemented?","After approval, during the scheduled low-usage window with stakeholders notified","This limits impact and keeps everyone informed.",["Immediately, because the patch is critical","Approval and scheduling still apply."],["During peak hours so users can report issues","That maximizes impact."],["Whenever the next annual review happens","That delays a critical fix unnecessarily."]),
+          D("What should be done after the patch is installed?","Verify the server and dependent services, update the change record, and update documentation","This closes the change properly.",["Delete the backup","The backup may still be needed."],["Close the request with no notes","It leaves no documentation."],["Only tell your manager verbally","There is no record of the change."])
+        ],
+        skills:["Operational Procedures","Problem Solving","Critical Thinking","Verification","Documentation"],
+        review:R("A technician wanted to patch a production server without process.","The server affects everyone, no rollback plan existed, and policy required change management.","Request the change, document risk and rollback, get approval, schedule, implement, verify, document.","Skipping change management would create outage and compliance risk.","Follow the change process: request, approval, rollback plan, maintenance window, verification.","Changes are controlled to reduce risk and ensure recoverability.","Change management, rollback plans, scheduling, and documentation.")
+      },
+      {
+        id:"TKT-2010", priority:"HIGH", level:"Level 3", department:"Facilities", device:"Employee workstation",
+        title:"Technician discovers prohibited content during a repair",
+        scenario:"While fixing a slow workstation, a technician opens a folder and sees what appears to be illegal content. The employee is not at the desk.",
+        snapshot:[["Task","Routine performance repair"],["Discovery","Possible illegal content"],["Device state","Powered on, signed in"],["Policy","Incident response and evidence handling required"]],
+        customer:[["Who normally uses this PC?","One assigned employee."],["Is anyone else nearby?","No."],["Do you know how long the files have been there?","I do not."]],
+        diagnostics:[["Review acceptable use policy","Prohibited content must be reported immediately to security/HR."],["Check device state","The workstation is unlocked and connected to the network."],["Review evidence handling procedure","Evidence must be preserved and handled with documentation."],["Check who has access to the device","Only IT and the assigned user."],["Check local policy contacts","Security team contact is available."]],
+        hints:["Your role is to report and preserve, not to investigate.","Think about proving the evidence has not been altered."],
+        decisions:[
+          D("What should the technician do first?","Stop, avoid changing anything, and report immediately to security or the designated contact","This follows policy and avoids altering evidence.",["Delete the files to remove the risk","That destroys evidence."],["Copy the files to a USB drive","That mishandles evidence."],["Question the employee informally","That could interfere with the investigation."]),
+          D("How should the device be handled?","Secure it, limit access, and document what was seen and done","This preserves evidence and accountability.",["Reimage the machine","That destroys evidence."],["Leave it unlocked at the desk","Others could access or alter it."],["Take pictures with a personal phone","That mishandles potentially sensitive content."]),
+          D("Which term describes the documented trail of who handled evidence and when?","Chain of custody","It proves the evidence was handled properly.",["Change management","That tracks system changes."],["Asset inventory","That lists equipment."],["Backup rotation","That describes backup schedules."]),
+          D("What is the best closing action?","Provide a factual report to the appropriate team and follow their instructions","Only authorized people investigate.",["Discuss it with coworkers","That breaks confidentiality."],["Keep it private to avoid trouble","Policy requires reporting."],["Post a warning in a team chat","That spreads sensitive information."])
+        ],
+        skills:["Operational Procedures","Security","Problem Solving","Critical Thinking","Documentation"],
+        review:R("A technician found possible prohibited content during a repair.","The PC was unlocked, policy required reporting, and evidence integrity mattered.","Stop, report, secure the device, document, maintain chain of custody, follow instructions.","A policy and evidence-handling incident, not a repair task.","Report to the proper contact, preserve the device, and document everything.","Altering evidence or investigating informally can ruin a legitimate investigation.","Incident reporting, chain of custody, prohibited content, and professionalism.")
+      },
+      {
+        id:"TKT-2011", priority:"MEDIUM", level:"Level 4", department:"Accounting", device:"File server share",
+        title:"Employee can open an Accounting share but cannot save changes",
+        scenario:"An accounting employee can open files in a mapped department share but gets 'Access denied' when saving. Coworkers can save without problems.",
+        snapshot:[["Share permission","Everyone: Full Control"],["NTFS permission","Accounting group: Read"],["User group","Accounting"],["Symptom","Open works, save denied"]],
+        customer:[["Do coworkers have the same problem?","The senior accountants can save."],["Was this working before?","It never worked for me."],["Which group are you in?","Accounting staff."]],
+        diagnostics:[["Check share permissions","Everyone has Full Control on the share."],["Check NTFS permissions","Accounting group has Read; the Senior Accountants group has Modify."],["Check user group membership","The user is in Accounting but not Senior Accountants."],["Check disk space","The file server volume has plenty of free space."],["Check mapped drive","Drive connects to the correct share."]],
+        hints:["When share and NTFS permissions differ, the most restrictive effective permission applies.","Apply the principle of least privilege."],
+        decisions:[
+          D("What should you compare first?","Share permissions and NTFS permissions","Both apply to network access.",["The printer queue","Printing is unrelated."],["The NIC link speed","The user can open files, so the connection works."],["The server's free disk space","There is plenty of free space."]),
+          D("Why can the user read but not save?","NTFS Read is more restrictive than the share's Full Control, so the effective permission is Read","The most restrictive combination wins.",["Share permissions always override NTFS","They do not; the most restrictive result applies."],["The user's profile is corrupted","Other access works normally."],["The drive letter is wrong","The correct share is mapped."]),
+          D("What is the best fix?","Grant the appropriate NTFS Modify permission to a group the user should belong to (per approval)","It gives only the necessary access through a group.",["Add the user to local Administrators on the server","That violates least privilege."],["Grant Everyone Full Control on NTFS","That is far too broad."],["Take ownership of the folder with the user's account","That is unnecessary and risky."]),
+          D("How do you verify?","Have the user save an edited file and confirm other users' access has not been widened","It tests the need and checks for over-permissioning.",["Confirm the user can still open the file","Open access was never the issue."],["Check that the share is online","The share was already working."],["Restart the file server","It is not needed and disruptive."])
+        ],
+        skills:["Operating Systems","Security","Problem Solving","Critical Thinking","Troubleshooting Methodology","Verification","Documentation"],
+        review:R("A user could read but not save files on a shared folder.","Share was Full Control but NTFS was Read for the user's group.","Compare share and NTFS permissions, check groups, identify the effective permission, grant least privilege, retest.","NTFS Read limited the effective permission.","Grant Modify through the proper approved group.","Effective permission is the most restrictive of share and NTFS.","NTFS vs share permissions, groups, and least privilege.")
+      },
+      {
+        id:"TKT-2012", priority:"CRITICAL", level:"Final Challenge", department:"Company-wide", device:"Workstation and file server",
+        title:"Ransom note appears and shared files are renamed and unreadable",
+        scenario:"Several employees report that shared files have strange extensions and cannot be opened. A text file demanding payment appears in every folder. Activity seems to be spreading from one workstation.",
+        snapshot:[["Symptom","Files renamed and unreadable"],["Ransom note","Present in each folder"],["Suspected source","Workstation in Marketing"],["Backups","One offline copy and one network-attached copy"]],
+        customer:[["When did it start?","About 20 minutes ago."],["What did the Marketing user do?","They opened an invoice attachment from an unknown sender."],["Are backups recent?","Nightly backups run to a share and a weekly offline copy."]],
+        diagnostics:[["Check file server activity","Files are being modified from the Marketing user's account and workstation."],["Check the Marketing workstation","Unknown process is encrypting files; it is still on the network."],["Check the backups","The network-attached backup share shows modified files; the offline copy is intact."],["Check email logs","The invoice attachment came from an external unknown sender."],["Check permissions","The Marketing user has write access to many shared folders."]],
+        hints:["Stop the spread before anything else.","Not every backup is equally safe from ransomware."],
+        decisions:[
+          D("What is the first action?","Isolate the infected workstation from the network","This contains the spread immediately.",["Pay the ransom","That does not guarantee recovery and funds attackers."],["Restore files from the network backup immediately","The infection is still active and could re-encrypt files."],["Run disk defragmentation on the file server","That does nothing to stop encryption."]),
+          D("Which evidence best identifies the source and scope?","File server logs and endpoint evidence showing which account and host are modifying files","They identify the source and affected data.",["Windows Update history","That does not show who is encrypting files."],["Network speed test","It does not identify the source."],["Printer logs","They are not relevant."]),
+          D("What is the best recovery approach?","Eradicate the malware, then restore from clean offline backups","Restoring on a clean system prevents reinfection.",["Restore from the network backup right away","It may already be encrypted."],["Rename the files back to original extensions","That does not decrypt the content."],["Run chkdsk on the volume","The files are encrypted, not corrupt."]),
+          D("Which backup practice would best protect against this?","3-2-1: three copies, two media types, one offline or off-site","An offline copy can survive ransomware.",["Back up to a second partition on the same server","The ransomware may reach it too."],["Back up to a share writable by all users","Ransomware could encrypt it."],["Sync folders to cloud only","Sync can propagate encrypted files."]),
+          D("What was the most likely root cause?","A malicious attachment run by a user who had excessive write permissions","Phishing combined with broad permissions allowed the spread.",["A failed disk on the file server","The file contents were encrypted by a process."],["An expired software license","That would not encrypt files."],["A dead UPS battery","Unrelated to the activity."]),
+          D("Which preventive measures best reduce recurrence?","Least privilege, email filtering, user awareness training, and endpoint protection","Layered controls address both the human and technical causes.",["Remove all backups to reduce risk","That removes recovery options."],["Give users more access for flexibility","That increases exposure."],["Disable endpoint protection to improve speed","That weakens defense."]),
+          D("What is the best final verification and closure?","Verify restored data and services, confirm the malware is gone, document the incident, and educate users","It ensures recovery, closure, and lessons learned.",["Close the ticket after restoring files","Verification and documentation are missing."],["Only confirm the ransom note is gone","That does not prove the systems are clean."],["Tell users to keep working","Systems must be verified first."])
+        ],
+        skills:["Operating Systems","Software Troubleshooting","Security","Operational Procedures","Problem Solving","Critical Thinking","Troubleshooting Methodology","Verification","Documentation"],
+        review:R("A ransomware infection encrypted shared files from a Marketing workstation.","Files were modified from one account and host, an unknown attachment was opened, and only the offline backup was intact.","Isolate, identify source and scope, eradicate, restore from clean backups, find root cause, harden, verify, document.","Phishing attachment executed by a user with excessive permissions.","Isolate the host, remove the malware, restore from the offline backup, apply least privilege and training, verify and document.","Containment first prevents more damage; clean backups allow recovery without paying.","Ransomware response, backups (3-2-1), least privilege, user training, and incident documentation.")
+      }
+    ];
+
+  const reflectionQuestions = [
+    "Which problem was the hardest to diagnose and why?",
+    "Which information was most useful when troubleshooting?",
+    "Why is it important to identify the root cause instead of immediately replacing hardware?",
+    "Which Core 2 topic do you feel most confident applying?",
+    "Which area do you need more practice with?",
+    "How could the troubleshooting skills from this simulation apply to an actual IT support job?"
+  ];
+
+  const state = {
+    started:false,
+    active:null,
+    completed:{},
+    progress:{},
+    totalWrong:0,
+    totalHints:0,
+    startTime:null,
+    timer:null,
+    reflections:Array(6).fill(""),
+    reportOpen:false
+  };
+
+  function freshTicketProgress(){
+    return {status:"OPEN", step:0, wrong:0, hints:0, hintIndex:0, asked:{}, ran:{}, choiceOrder:{}, feedback:null, nextReady:false, note:"", score:null};
+  }
+  tickets.forEach(t => state.progress[t.id] = freshTicketProgress());
+
+  function priorityClass(p){ return p === "LOW" ? "p-low" : p === "MEDIUM" ? "p-medium" : p === "HIGH" ? "p-high" : "p-critical"; }
+  function statusClass(s){ return s === "RESOLVED" ? "status-done" : s === "IN PROGRESS" ? "status-progress" : "status-open"; }
+  function currentOverall(){
+    const completedScores = tickets.filter(t => state.completed[t.id]).map(t => state.progress[t.id].score);
+    if(!completedScores.length) return 100;
+    return Math.max(0, Math.round(completedScores.reduce((a,b)=>a+b,0)/completedScores.length));
+  }
+  function formatTime(sec){
+    const m = Math.floor(sec/60), s = sec%60;
+    return String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+  }
+  function elapsedSeconds(){ return state.startTime ? Math.max(0, Math.floor((Date.now()-state.startTime)/1000)) : 0; }
+  function updateMetrics(){
+    const resolved = Object.keys(state.completed).length;
+    $("#mResolved").textContent = resolved + " / " + tickets.length;
+    $("#mProgress").style.width = (resolved/tickets.length*100) + "%";
+    $("#mScore").textContent = currentOverall() + "%";
+    $("#mWrong").textContent = state.totalWrong;
+    $("#mHints").textContent = state.totalHints;
+    $("#mTime").textContent = formatTime(elapsedSeconds());
+    $("#finishBanner").classList.toggle("hidden", resolved !== tickets.length);
+    $("#reportBtn").classList.toggle("hidden", resolved !== tickets.length);
+  }
+  function renderQueue(){
+    const q = $("#ticketQueue");
+    q.innerHTML = tickets.map(t => {
+      const p = state.progress[t.id];
+      const active = state.active === t.id ? "active" : "";
+      const done = p.status === "RESOLVED" ? "done" : "";
+      return `<button type="button" class="ticket-item ${active} ${done}" data-ticket="${t.id}">
+        <div class="ticket-top"><span class="ticket-id">${t.id}</span><span class="priority ${priorityClass(t.priority)}">${t.priority}</span></div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;">${esc(t.department)}</div>
+        <div class="ticket-meta"><span>${esc(t.device)}</span><span>·</span><span>${esc(t.level)}</span></div>
+        <div class="status-line ${statusClass(p.status)}">${p.status}</div>
+      </button>`;
+    }).join("");
+    q.querySelectorAll("[data-ticket]").forEach(btn => btn.addEventListener("click", () => openTicket(btn.dataset.ticket)));
+  }
+
+  function startSimulation(){
+    state.started = true;
+    state.startTime = Date.now();
+    $("#welcomeView").classList.add("hidden");
+    $("#simulationView").classList.remove("hidden");
+    renderQueue();
+    updateMetrics();
+    if(state.timer) clearInterval(state.timer);
+    state.timer = setInterval(updateMetrics,1000);
+    openTicket(tickets[0].id);
+  }
+
+  function openTicket(id){
+    state.active = id;
+    state.reportOpen = false;
+    $("#reportView").classList.add("hidden");
+    $("#simulationView").classList.remove("hidden");
+    const p = state.progress[id];
+    if(p.status === "OPEN") p.status = "IN PROGRESS";
+    renderQueue();
+    renderTicket();
+  }
+
+  function workflowHTML(t,p){
+    if(!(t.level === "Level 4" || t.level === "Final Challenge")) return "";
+    const labels=["Identify","Gather","Theory","Test","Root cause","Implement","Verify","Document"];
+    const evidenceCount=Object.keys(p.asked).length+Object.keys(p.ran).length;
+    let current=0;
+    if(evidenceCount>=2) current=1;
+    if(p.step>0) current=Math.max(current,2);
+    if(p.step>1) current=Math.max(current,3);
+    if(p.step>2) current=Math.max(current,4);
+    if(p.step>3) current=Math.max(current,5);
+    if(p.step>=Math.max(1,t.decisions.length-1)) current=Math.max(current,6);
+    if(p.step>=t.decisions.length) current=7;
+    if(p.status==="RESOLVED") current=8;
+    const steps=labels.map((label,i)=>`<div class="workflow-step ${i<current?"done":i===current&&current<8?"active":""}">${i+1}. ${label}</div>`).join("");
+    return `<div class="workflow-strip"><strong>Technician troubleshooting workflow</strong><div class="workflow-steps">${steps}</div></div>`;
+  }
+
+  function actionSection(title, type, rows, usedMap){
+    const buttons = rows.map((row,i) => {
+      const used = !!usedMap[i];
+      return `<button type="button" class="tool-btn ${used?"used":""}" data-${type}="${i}" ${used?"disabled":""}>${esc(row[0])}</button>`;
+    }).join("");
+    const usedEntries = Object.keys(usedMap).filter(k=>usedMap[k]).map(k => {
+      const idx=Number(k); return `<div class="log-entry"><strong>${esc(rows[idx][0])}</strong>${esc(rows[idx][1])}</div>`;
+    }).join("");
+    return `<div class="section-card">
+      <div class="section-title"><strong>${title}</strong><span style="font-size:11px;color:#687786;">Gather information</span></div>
+      <div class="section-body"><div class="tool-grid">${buttons}</div><div class="results-log">${usedEntries}</div></div>
+    </div>`;
+  }
+
+  function renderDecision(t,p){
+    if(p.step >= t.decisions.length){
+      return `<div class="resolution-box">
+        <h3>Document the resolution</h3>
+        <div style="font-size:13px;color:#687786;margin-bottom:8px;">In 1–3 sentences, explain the evidence that supported your diagnosis, what you changed, and how you verified the result.</div>
+        <textarea id="resolutionNote" maxlength="700" placeholder="Example structure: Evidence → root cause → action → verification">${esc(p.note)}</textarea>
+        <div class="resolution-actions"><span class="char-note" id="charNote">Minimum 30 characters · ${p.note.length}/700</span><button type="button" class="primary-btn" id="resolveTicketBtn">Resolve Ticket</button></div>
+        <div id="resolutionFeedback"></div>
+      </div>`;
+    }
+    const d = t.decisions[p.step];
+    if(!p.choiceOrder[p.step]){
+      const order=d.choices.map((_,i)=>i);
+      for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+      p.choiceOrder[p.step]=order;
+    }
+    const choices = p.choiceOrder[p.step].map(i=>{ const c=d.choices[i]; return `<button type="button" class="choice-btn" data-choice="${i}">${esc(c[0])}</button>`; }).join("");
+    let fb = "";
+    if(p.feedback){
+      fb = `<div class="feedback ${p.feedback.good?"good":"bad"}">${esc(p.feedback.text)}</div>`;
+      if(p.nextReady) fb += `<div class="next-wrap"><button class="primary-btn" id="nextDecisionBtn" type="button">Continue Investigation</button></div>`;
+    }
+    return `<div class="section-card">
+      <div class="section-title"><strong>Troubleshooting Decision</strong><button type="button" class="secondary-btn" id="hintBtn" style="padding:7px 10px;">Hint</button></div>
+      <div class="section-body">
+        <div class="decision-box"><div class="decision-count">Decision ${p.step+1} of ${t.decisions.length}</div><h3>${esc(d.q)}</h3><div class="choices">${choices}</div>${fb}</div>
+        ${p.hintIndex>0 ? `<div class="hint-box"><strong>Hint ${p.hintIndex}:</strong> ${esc(t.hints[Math.min(p.hintIndex-1,t.hints.length-1)])}</div>` : ""}
+      </div>
+    </div>`;
+  }
+
+  function renderTicket(){
+    if(!state.active) return;
+    const t = tickets.find(x=>x.id===state.active), p=state.progress[t.id];
+    $("#emptyTicket").classList.add("hidden");
+    const c = $("#ticketContent");
+    c.classList.remove("hidden");
+    const snapshot = t.snapshot.map(r=>`<div class="snapshot-item"><span>${esc(r[0])}</span><strong>${esc(r[1])}</strong></div>`).join("");
+    const resolvedNotice = p.status === "RESOLVED" ? `<div class="finish-banner" style="margin-bottom:12px;"><div><strong>Ticket resolved · ${p.score}% ticket score</strong><div style="font-size:13px;color:#376b52;">You may review the evidence or select another ticket.</div></div></div>` : "";
+    c.innerHTML = `${resolvedNotice}<div class="case-header">
+      <div><div class="eyebrow" style="color:#1769aa;opacity:1;">${esc(t.id)} · ${esc(t.priority)} priority</div><h2>${esc(t.title)}</h2><div class="case-sub">${esc(t.department)} · ${esc(t.device)} · ${esc(p.status)}</div></div>
+      <span class="level-tag">${esc(t.level)}</span>
+    </div>
+    <div class="scenario">${esc(t.scenario)}</div>
+    <div class="snapshot">${snapshot}</div>
+    ${workflowHTML(t,p)}
+    ${actionSection("Ask the User", "ask", t.customer, p.asked)}
+    ${actionSection("Run Diagnostics", "diag", t.diagnostics, p.ran)}
+    ${p.status !== "RESOLVED" ? renderDecision(t,p) : `<div class="resolution-box"><h3>Your resolution note</h3><div style="font-size:13px;color:#334454;white-space:pre-wrap;">${esc(p.note)}</div></div>`}`;
+
+    c.querySelectorAll("[data-ask]").forEach(btn => btn.addEventListener("click",()=>{ p.asked[Number(btn.dataset.ask)] = true; renderTicket(); }));
+    c.querySelectorAll("[data-diag]").forEach(btn => btn.addEventListener("click",()=>{ p.ran[Number(btn.dataset.diag)] = true; renderTicket(); }));
+    c.querySelectorAll("[data-choice]").forEach(btn => btn.addEventListener("click",()=>handleChoice(Number(btn.dataset.choice))));
+    const next = $("#nextDecisionBtn"); if(next) next.addEventListener("click",()=>{ p.step++; p.feedback=null; p.nextReady=false; p.hintIndex=0; renderTicket(); });
+    const hint = $("#hintBtn"); if(hint) hint.addEventListener("click",useHint);
+    const ta = $("#resolutionNote");
+    if(ta){
+      ta.addEventListener("input",()=>{ p.note=ta.value; $("#charNote").textContent=`Minimum 30 characters · ${p.note.length}/700`; });
+      $("#resolveTicketBtn").addEventListener("click",resolveTicket);
+    }
+    c.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  function handleChoice(index){
+    const t=tickets.find(x=>x.id===state.active), p=state.progress[t.id], d=t.decisions[p.step], ch=d.choices[index];
+    if(p.nextReady) return;
+    if(ch[1]){
+      p.feedback={good:true,text:ch[2]}; p.nextReady=true;
+    }else{
+      p.wrong++; state.totalWrong++; p.feedback={good:false,text:ch[2] + " Use the evidence available and choose a better next step."}; p.nextReady=false;
+    }
+    updateMetrics(); renderTicket();
+  }
+
+  function useHint(){
+    const t=tickets.find(x=>x.id===state.active), p=state.progress[t.id];
+    if(p.hintIndex < t.hints.length){
+      p.hintIndex++; p.hints++; state.totalHints++; updateMetrics(); renderTicket();
+    } else {
+      p.feedback={good:false,text:"You have used the available hints for this ticket. Re-read the evidence and diagnostic results."};
+      renderTicket();
+    }
+  }
+
+  function resolveTicket(){
+    const t=tickets.find(x=>x.id===state.active), p=state.progress[t.id];
+    const ta=$("#resolutionNote");
+    p.note=ta ? ta.value.trim() : p.note.trim();
+    if(p.note.length < 30){
+      $("#resolutionFeedback").innerHTML='<div class="feedback bad">Add a little more technician documentation. Include the evidence, action, and verification you used.</div>';
+      return;
+    }
+    p.status="RESOLVED";
+    p.score=Math.max(50,100-(p.wrong*7)-(p.hints*4));
+    state.completed[t.id]=true;
+    updateMetrics(); renderQueue(); renderTicket();
+    const nextTicket=tickets.find(x=>!state.completed[x.id]);
+    if(nextTicket){
+      setTimeout(()=>openTicket(nextTicket.id),350);
+    }
+  }
+
+  function performanceLevel(score){
+    if(score>=90) return ["Excellent — Ready for advanced troubleshooting","You consistently used evidence, logical sequencing, verification, and documentation."];
+    if(score>=80) return ["Strong — Good Core 2 foundation","Your troubleshooting decisions show a solid foundation. Review the tickets where you needed extra attempts or hints."];
+    if(score>=70) return ["Developing — Review several troubleshooting areas","You are applying the workflow, but several areas would benefit from more practice before moving on."];
+    return ["Needs Practice — Revisit the Core 2 labs before attempting the simulation again","Use the answer review to identify where your diagnostic sequence broke down, then retry after review."];
+  }
+
+  function skillScores(){
+    const names=["Hardware Troubleshooting","Networking","Mobile Connectivity","Virtualization","Cloud","Problem Solving","Critical Thinking","Troubleshooting Methodology","Verification","Documentation"];
+    const out={};
+    names.forEach(name=>{
+      const related=tickets.filter(t=>t.skills.includes(name));
+      const scores=related.map(t=>state.progress[t.id].score || 0);
+      out[name]=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;
+    });
+    return out;
+  }
+
+  function renderReport(tab="summary"){
+    state.reportOpen=true;
+    $("#simulationView").classList.add("hidden");
+    const rv=$("#reportView"); rv.classList.remove("hidden");
+    const score=currentOverall();
+    const [level,desc]=performanceLevel(score);
+    const skills=skillScores();
+    const skillCards=Object.entries(skills).map(([k,v])=>`<div class="skill-card"><div class="skill-top"><span>${esc(k)}</span><span>${v}%</span></div><div class="skill-bar"><div class="skill-fill" style="width:${v}%"></div></div></div>`).join("");
+    const totalDecisions=tickets.reduce((sum,t)=>sum+t.decisions.length,0);
+    const elapsed=formatTime(elapsedSeconds());
+    const reportSummary=`
+      <div class="report-hero">
+        <div class="score-ring" style="--scoreDeg:${score}%;"><div class="score-ring-inner"><div><b>${score}%</b><span>Overall</span></div></div></div>
+        <div><div class="eyebrow">A+ Core 1 Technician Performance Report</div><h2>${esc(level)}</h2><p>${esc(desc)}</p><p><strong>Northstar Creative Solutions</strong> · Junior IT Support Technician</p></div>
+      </div>
+      <div class="report-stats">
+        <div class="report-stat"><b>${tickets.length}</b><span>Tickets completed</span></div>
+        <div class="report-stat"><b>${tickets.filter(t=>state.progress[t.id].wrong===0).length}</b><span>Tickets solved with no wrong decisions</span></div>
+        <div class="report-stat"><b>${state.totalWrong}</b><span>Incorrect decisions</span></div>
+        <div class="report-stat"><b>${state.totalHints}</b><span>Hints used</span></div>
+        <div class="report-stat"><b>${elapsed}</b><span>Shift time</span></div>
+      </div>
+      <div class="panel"><div class="panel-head"><h3>Performance by Skill</h3><span style="font-size:12px;color:#687786;">${totalDecisions} troubleshooting decisions</span></div><div class="ticket-content"><div class="report-grid">${skillCards}</div></div></div>`;
+
+    const review = `<div class="review-list">${tickets.map(t=>`<details><summary>${t.id} — ${esc(t.title)}</summary><div class="review-body">
+      <p><strong>What happened:</strong> ${esc(t.review.happened)}</p>
+      <p><strong>What the student should have noticed:</strong> ${esc(t.review.noticed)}</p>
+      <p><strong>Correct diagnostic process:</strong> ${esc(t.review.process)}</p>
+      <p><strong>Root cause:</strong> ${esc(t.review.root)}</p>
+      <p><strong>Correct solution:</strong> ${esc(t.review.solution)}</p>
+      <p><strong>Why the solution works:</strong> ${esc(t.review.why)}</p>
+      <p><strong>A+ concept reinforced:</strong> ${esc(t.review.concept)}</p>
+      <p><strong>Your ticket score:</strong> ${state.progress[t.id].score}% &nbsp; · &nbsp; <strong>Wrong decisions:</strong> ${state.progress[t.id].wrong} &nbsp; · &nbsp; <strong>Hints:</strong> ${state.progress[t.id].hints}</p>
+      <p><strong>Your documentation:</strong> ${esc(state.progress[t.id].note)}</p>
+    </div></details>`).join("")}</div>`;
+
+    const reflection = `<div class="reflection-grid">${reflectionQuestions.map((q,i)=>`<div class="reflection-item"><label for="refl${i}">${i+1}. ${esc(q)}</label><textarea id="refl${i}" maxlength="1200" data-reflect="${i}" placeholder="Type your reflection here...">${esc(state.reflections[i])}</textarea></div>`).join("")}<div class="save-note" id="saveNote"></div></div>`;
+
+    const body = tab === "review" ? review : tab === "reflection" ? reflection : reportSummary;
+    rv.innerHTML = `<div class="tabs">
+      <button type="button" class="tab-btn ${tab==="summary"?"active":""}" data-tab="summary">Performance Report</button>
+      <button type="button" class="tab-btn ${tab==="review"?"active":""}" data-tab="review">Answer Review</button>
+      <button type="button" class="tab-btn ${tab==="reflection"?"active":""}" data-tab="reflection">Technician Reflection</button>
+      <button type="button" class="secondary-btn" id="backToQueue" style="margin-left:auto;">Back to Queue</button>
+    </div>${body}`;
+    rv.querySelectorAll("[data-tab]").forEach(btn=>btn.addEventListener("click",()=>renderReport(btn.dataset.tab)));
+    $("#backToQueue").addEventListener("click",()=>{ rv.classList.add("hidden"); $("#simulationView").classList.remove("hidden"); state.reportOpen=false; });
+    rv.querySelectorAll("[data-reflect]").forEach(ta=>ta.addEventListener("input",()=>{
+      state.reflections[Number(ta.dataset.reflect)]=ta.value;
+      const sn=$("#saveNote"); if(sn){sn.textContent="Reflection saved in this simulation session."; setTimeout(()=>{if($("#saveNote")) $("#saveNote").textContent="";},900);}
+    }));
+    rv.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  function resetAll(){
+    if(state.timer) clearInterval(state.timer);
+    state.started=false; state.active=null; state.completed={}; state.totalWrong=0; state.totalHints=0; state.startTime=null; state.reportOpen=false; state.reflections=Array(6).fill("");
+    tickets.forEach(t=>state.progress[t.id]=freshTicketProgress());
+    $("#resetModal").classList.add("hidden");
+    $("#simulationView").classList.add("hidden");
+    $("#reportView").classList.add("hidden");
+    $("#welcomeView").classList.remove("hidden");
+    $("#reportBtn").classList.add("hidden");
+    $("#ticketContent").classList.add("hidden");
+    $("#emptyTicket").classList.remove("hidden");
+    updateMetrics(); renderQueue();
+    root.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  $("#startBtn").addEventListener("click",startSimulation);
+  $("#resetBtn").addEventListener("click",()=>$("#resetModal").classList.remove("hidden"));
+  $("#cancelReset").addEventListener("click",()=>$("#resetModal").classList.add("hidden"));
+  $("#confirmReset").addEventListener("click",resetAll);
+  $("#resetModal").addEventListener("click",e=>{if(e.target.id==="resetModal") $("#resetModal").classList.add("hidden");});
+  $("#finishBtn").addEventListener("click",()=>renderReport("summary"));
+  $("#reportBtn").addEventListener("click",()=>renderReport("summary"));
+  renderQueue(); updateMetrics();
+})();
+</script>
+</body>
+</html>
